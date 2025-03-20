@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WallPark - Painel de Controle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+        }
+        .sidebar {
+            background-color: white;
+            width: 250px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        .sidebar h2 {
+            font-size: 18px;
+            color: #333;
+        }
+        .sidebar a {
+            display: block;
+            color: #4CAF50;
+            font-size: 16px;
+            padding: 10px 0;
+            text-decoration: none;
+            border-bottom: 1px solid #ddd;
+        }
+        .sidebar a:hover {
+            background-color: #f1f1f1;
+            border-radius: 4px;
+        }
+        .content {
+            flex-grow: 1;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .content h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .card {
+            background-color: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .card p {
+            font-size: 16px;
+            color: #555;
+        }
+        footer {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>WallPark - Painel de Controle</h1>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Menu</h2>
+            <a href="#">Visão Geral</a>
+            <a href="#">Estacionamentos</a>
+            <a href="#">Veículos</a>
+            <a href="#">Relatórios</a>
+            <a href="#">Configurações</a>
+            <a href="#">Sair</a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <h2>Bem-vindo, [Nome do Usuário]!</h2>
+
+            <div class="card">
+                <h3>Estacionamentos Ativos</h3>
+                <p>Gerencie os estacionamentos ativos e visualise informações como ocupação e horários de operação.</p>
+            </div>
+
+            <div class="card">
+                <h3>Últimos Veículos Registrados</h3>
+                <p>Veja os últimos veículos que entraram ou saíram do sistema de estacionamento.</p>
+            </div>
+
+            <div class="card">
+                <h3>Relatórios Recentes</h3>
+                <p>Confira relatórios financeiros e de utilização do estacionamento para otimizar a gestão.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 WallPark - Todos os direitos reservados. | <a href="#">Política de Privacidade</a></p>
+    </footer>
+
+</body>
+</html>
