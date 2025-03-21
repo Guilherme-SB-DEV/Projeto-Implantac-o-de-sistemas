@@ -27,9 +27,9 @@ import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 @EnableWebSecurity
 public class SecurityConfig {
     @Value("${jwt.public.key}")
-    private RSAPublicKey key;
+    private RSAPublicKey public_key;
     @Value("${jwt.private.key}")
-    private RSAPrivateKey priv;
+    private RSAPrivateKey private_key;
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -49,12 +49,12 @@ public class SecurityConfig {
     }
     @Bean
     public JwtDecoder jwtDecoder() {
-        return NimbusJwtDecoder.withPublicKey(key).build();
+        return NimbusJwtDecoder.withPublicKey(public_key).build();
     }
 
     @Bean
     public JwtEncoder jwtEncoder() {
-        JWK jwk = new RSAKey.Builder(this.key).privateKey(priv).build();
+        JWK jwk = new RSAKey.Builder(public_key).privateKey(private_key).build();
         var jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
         return new NimbusJwtEncoder(jwks);
     }
