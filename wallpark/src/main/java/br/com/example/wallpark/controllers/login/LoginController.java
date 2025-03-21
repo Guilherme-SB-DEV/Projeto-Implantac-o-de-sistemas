@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
@@ -23,11 +22,9 @@ import br.com.example.wallpark.repositorio.RepositorioUsr;
 public class LoginController {
     private final RepositorioUsr repositorioUsr;
     private final JwtEncoder jwtEncoder;
-    private BCryptPasswordEncoder encoder;
-
-    public LoginController(JwtEncoder jwtEncoder, BCryptPasswordEncoder encoder, RepositorioUsr repositorioUsr) {
+    
+    public LoginController( JwtEncoder jwtEncoder, RepositorioUsr repositorioUsr) {
         this.jwtEncoder = jwtEncoder;
-        this.encoder = encoder;
         this.repositorioUsr = repositorioUsr;
     }
 

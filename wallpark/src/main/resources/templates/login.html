@@ -104,11 +104,17 @@
             headers: { "content-type": "application/json" },
             body: JSON.stringify(usr),
           })
-          .then(response =>{
+          .then(async response =>{
             if(response.status === 404) throw new Error('Email ou senha incorretos');
+            if(response.ok){
+              const data = await response.json();
+              console.log(data.accessToken)
+              window.localStorage.setItem('token', data.accessToken);
+            }
           })
           .then(data =>{
             console.log('login realizado')
+
             alert("login realizado com sucesso")
           }).catch(error =>{
             alert("erro ao logar: "+ error.message)
