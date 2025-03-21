@@ -12,6 +12,5 @@ import br.com.example.wallpark.models.Usuario;
 @Repository
 public interface RepositorioUsr extends CrudRepository<Usuario, Integer>{
     
-    @Query(value = "SELECT * FROM usuario WHERE email = :email", nativeQuery=true)
-    Optional<Usuario> findByEmail(@Param("email") String email);   
+    Optional<Usuario> findByEmail(String email);   
 }

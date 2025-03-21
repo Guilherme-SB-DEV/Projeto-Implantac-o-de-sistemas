@@ -1,27 +1,22 @@
 package br.com.example.wallpark.models;
 
-import java.util.Collection;
-import java.util.List;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import br.com.example.wallpark.repositorio.UsrRole;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
-public class Usuario implements UserDetails {
+@Table(name="usuario")
+public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String nome;
+    @Column(unique = true)
     private String email;
     private String senha;
-    private UsrRole role;
 
     public Usuario() {
     }
@@ -62,49 +57,6 @@ public class Usuario implements UserDetails {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    @Override
-    public String getUsername() {
-        return email;
-    }
-
-    @Override
-    public String getPassword() {
-        // TODO Auto-generated method stub
-        return senha;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (this.role == UsrRole.ADMIN)
-            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-        else
-            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        // TODO Auto-generated method stub
-        return false;
     }
 
 }

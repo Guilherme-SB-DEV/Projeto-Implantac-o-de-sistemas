@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.example.wallpark.models.Usuario;
 import br.com.example.wallpark.repositorio.RepositorioCarro;
 import br.com.example.wallpark.repositorio.RepositorioUsr;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,13 +33,7 @@ public class Controller {
         mv.setViewName("init");
         return mv;
     }
-
-    @GetMapping("/login")
-    public ModelAndView login() {
-        mv.setViewName("login");
-        return mv;
-    }
-
+    
     // cadastro
     @GetMapping("/cadastro")
     public ModelAndView cadastro() {
@@ -55,16 +51,5 @@ public class Controller {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         
     }
-
-    @PostMapping("/login")
-    public ResponseEntity<Usuario> login(@RequestBody Usuario usuario) {
-        Optional<Usuario> usr = repositorioUsr.findByEmail(usuario.getEmail()); 
-        if(usr.isPresent() && usr.get().getSenha().equals(usuario.getSenha()) ){
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-    }
-
-
-    
+   
 }
