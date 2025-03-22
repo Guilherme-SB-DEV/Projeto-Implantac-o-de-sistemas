@@ -167,7 +167,12 @@
             <label for="vaga">Vaga:</label>
             <select id="vaga" name="vaga">
               <option th:each="vaga : ${vagas}" th:value="${vaga.id}" th:text ="'vaga: '+ ${vaga.id}"></option>
+            </select>
 
+            <select name="porteCarro" id="porteCarro">
+              <option value="PEQUENO">Pequeno</option>
+              <option value="MEDIO">Medio</option>
+              <option value="GRANDE">Grande</option>
             </select>
 
 
@@ -214,19 +219,21 @@
   </body>
   <script>
     var addvaga = document.getElementById("addVaga");
+    var addCar = document.getElementById("addCar");
     addvaga.addEventListener("submit", function (event) {
       console.log("tá cahamdno a função");
       event.preventDefault();
       const porte = document.getElementById("porte").value;
       const piso = document.getElementById("piso").value;
-      const vaga = { piso: piso, porte: porte };
+      const vaga = document.getElementById("vaga").value
+      const cadastro = {piso: piso, porte: porte, "vaga_id": vaga};
       fetch("http://localhost:8080/cadVaga", {
         method: "POST",
         headers: {
           Accept: "application/json", // Aceita resposta em JSON
           "Content-Type": "application/json", // Envia dados em formato JSON
         },
-        body: JSON.stringify(vaga), // Envia os dados como JSON
+        body: JSON.stringify(cadastro), // Envia os dados como JSON
       })
         .then((response) => {
           if (response.ok) {
@@ -244,5 +251,28 @@
         .replace(/([A-Za-z0-9]{3})([A-Za-z0-9])/, "$1-$2");
       campo.value = valor;
     }
+    addCar.addEventListener("submit", function(event){
+      const vaga = document.getElementById("vaga").value;
+      const porte = document.getElementById("porteCarro").value
+      const placa = document.getElementById("placa").value
+      var carro = {"vaga": vaga, "porte": porte, "placa": placa};
+      fetch("http://localhost:8080/cadCar", {
+        method:"POST",
+        headers:{
+          Accept: "aplication/json",
+          "Content-Type": "aplication/json"
+        },
+        body: JSON.stringify()
+      })
+      .then(response =>{
+        if(response.ok){
+          alert("carro cadastrado com sucesso!")
+        }
+      })
+      .catch(error=>{
+        alert("erro ao cadastrar carro: "+error)
+      })
+
+    })
   </script>
 </html>

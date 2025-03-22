@@ -45,5 +45,11 @@ public class Vaga {
     public void setPiso(String piso) {
         this.piso = piso;
     }
+    public Carro getCarro() {
+        return carro;
+    }
+    public void setCarro(Carro carro) {
+        this.carro = carro;
+    }
     
 }

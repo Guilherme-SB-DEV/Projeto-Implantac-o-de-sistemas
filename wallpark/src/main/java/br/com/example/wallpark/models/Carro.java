@@ -21,13 +21,26 @@ public class Carro {
     private String modelo;
     @Enumerated(EnumType.STRING)
     private Porte porte;
-    private Double total;
-    
-    
     
     @OneToOne
     @JoinColumn(name = "vaga_id")
     private Vaga vaga;
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public Vaga getVaga() {
+        return vaga;
+    }
+    public void setVaga(Vaga vaga) {
+        this.vaga = vaga;
+    }
+    private Double total;
+    
+    
     
     public Porte getPorte() {
         return porte;

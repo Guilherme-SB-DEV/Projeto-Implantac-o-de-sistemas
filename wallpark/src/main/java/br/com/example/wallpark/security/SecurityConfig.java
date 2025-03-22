@@ -43,6 +43,7 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.GET, "/cadastro").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/init/1").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/cadVaga").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/cadCar").permitAll()
                                 .anyRequest().authenticated())
                 .oauth2ResourceServer(
                         conf -> conf.jwt(Customizer.withDefaults()))
