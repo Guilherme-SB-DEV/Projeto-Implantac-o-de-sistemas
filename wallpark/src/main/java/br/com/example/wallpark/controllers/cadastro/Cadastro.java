@@ -1,38 +1,24 @@
-package br.com.example.wallpark.controllers;
-
+package br.com.example.wallpark.controllers.cadastro;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.example.wallpark.models.Usuario;
-import br.com.example.wallpark.repositorio.RepositorioCarro;
 import br.com.example.wallpark.repositorio.RepositorioUsr;
 
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
 @RestController
-public class Controller {
-    @Autowired
-    private RepositorioCarro repositorio;
+public class Cadastro {
     @Autowired
     private RepositorioUsr repositorioUsr;
-
-    private ModelAndView mv = new ModelAndView();
-
-    // GETS
-    @GetMapping("/init/{id}")
-    public ModelAndView init(@PathVariable String id) {
-        mv.setViewName("init");
-        return mv;
-    }
     
-    // cadastro
+    private ModelAndView mv = new ModelAndView();
+       // cadastro
     @GetMapping("/cadastro")
     public ModelAndView cadastro() {
         mv.setViewName("cadastro");
@@ -49,5 +35,5 @@ public class Controller {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         
     }
-   
+    
 }

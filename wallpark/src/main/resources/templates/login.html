@@ -110,6 +110,7 @@
               const data = await response.json();
               console.log(data.accessToken)
               window.localStorage.setItem('token', data.accessToken);
+              window.localStorage.setItem('expiresIn', data.expiresIn);
             }
           })
           .then(data =>{

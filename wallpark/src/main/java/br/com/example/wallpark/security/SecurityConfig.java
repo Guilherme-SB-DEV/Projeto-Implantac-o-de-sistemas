@@ -41,6 +41,8 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.GET, "/login").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/cadastro").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/cadastro").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/init/1").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/cadVaga").permitAll()
                                 .anyRequest().authenticated())
                 .oauth2ResourceServer(
                         conf -> conf.jwt(Customizer.withDefaults()))
@@ -48,12 +50,12 @@ public class SecurityConfig {
         return http.build();
     }
     @Bean
-    public JwtDecoder jwtDecoder() {
+    JwtDecoder jwtDecoder() {
         return NimbusJwtDecoder.withPublicKey(public_key).build();
     }
 
     @Bean
-    public JwtEncoder jwtEncoder() {
+    JwtEncoder jwtEncoder() {
         JWK jwk = new RSAKey.Builder(public_key).privateKey(private_key).build();
         var jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
         return new NimbusJwtEncoder(jwks);
