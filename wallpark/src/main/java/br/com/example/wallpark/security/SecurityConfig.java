@@ -17,6 +17,8 @@ import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.JWKSet;
@@ -42,8 +44,8 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.POST, "/cadastro").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/cadastro").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/init/1").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/cadVaga").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/cadCar").permitAll()
+                                // .requestMatchers(HttpMethod.POST, "/cadVaga").permitAll()
+                                // .requestMatchers(HttpMethod.POST, "/cadCar").permitAll()
                                 .anyRequest().authenticated())
                 .oauth2ResourceServer(
                         conf -> conf.jwt(Customizer.withDefaults()))
@@ -65,5 +67,19 @@ public class SecurityConfig {
     @Bean
     BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedOrigins("http://localhost:8080") // Defina o endereço do seu frontend
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("*")
+                        .allowCredentials(true); // Permite enviar cookies e cabeçalhos
+            }
+        };
     }
 }

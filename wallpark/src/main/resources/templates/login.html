@@ -94,7 +94,7 @@
   </body>
   <script>
     var form = document.getElementById("formLogin");
-    form.addEventListener("submit", function(event) {
+    form.addEventListener("submit", async function(event) {
         event.preventDefault();
         const email = document.getElementById("email").value;
         const senha = document.getElementById("senha").value;
@@ -110,7 +110,19 @@
               const data = await response.json();
               console.log(data.accessToken)
               window.localStorage.setItem('token', data.accessToken);
-              window.localStorage.setItem('expiresIn', data.expiresIn);
+              const responseToken = await fetch(`http://localhost:8080/init/${data.id}`, {
+                method: "GET",
+                headers: {
+                  "Authorization": `Bearer ${data.accessToken}`,
+                  "Content-type": "application/json"
+                },
+                credentials: "include"
+              })
+              if(responseToken.ok){
+                console.log('resposeToken feito')
+                window.location.href = `http://localhost:8080/init/${data.id}`
+              }
+        
             }
           })
           .then(data =>{

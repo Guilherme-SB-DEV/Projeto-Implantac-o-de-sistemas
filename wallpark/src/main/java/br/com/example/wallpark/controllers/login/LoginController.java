@@ -46,7 +46,7 @@ public class LoginController {
                     .build();
             var token = jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
 
-            return ResponseEntity.ok(new LoginResponse(token, expiresIn));
+            return ResponseEntity.ok(new LoginResponse(usr.get().getId(),token, expiresIn));
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
