@@ -35,6 +35,9 @@ public class CarroController {
         if (vaga.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // Vaga não encontrada
         }
+        if(vaga.get().getPorte().equals(carro.getPorte()) || vaga.get().getPorte().equals("GRANDE") || (vaga.get().getPorte().equals("MEDIO") && carro.getPorte().equals("PEQUENO"))){
+            return ResponseEntity.status(HttpStatus.CONFLICT).build(); // Vaga não é do tipo do carro
+        }
         carroRequest.carro().setVaga(vaga.get());
         repositorio.save(carroRequest.carro());
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

@@ -5,9 +5,6 @@ import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.oauth2.jwt.JwtClaimsSet;
-import org.springframework.security.oauth2.jwt.JwtEncoder;
-import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,10 +18,8 @@ import br.com.example.wallpark.repositorio.RepositorioUsr;
 @RestController
 public class LoginController {
     private final RepositorioUsr repositorioUsr;
-    private final JwtEncoder jwtEncoder;
     
-    public LoginController( JwtEncoder jwtEncoder, RepositorioUsr repositorioUsr) {
-        this.jwtEncoder = jwtEncoder;
+    public LoginController(  RepositorioUsr repositorioUsr) {
         this.repositorioUsr = repositorioUsr;
     }
 
@@ -35,18 +30,8 @@ public class LoginController {
         Optional<Usuario> usr = repositorioUsr.findByEmail(usuario.getEmail());
         if (usr.isPresent() && usr.get().getSenha().equals(usuario.getSenha())) {
 
-            var now = Instant.now();
-            var expiresIn = now.plusSeconds(3600);
 
-            var claims = JwtClaimsSet.builder()
-                    .issuer("wallpark")
-                    .subject(Integer.toString(usr.get().getId()))
-                    .issuedAt(now)
-                    .expiresAt(expiresIn)
-                    .build();
-            var token = jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
-
-            return ResponseEntity.ok(new LoginResponse(usr.get().getId(),token, expiresIn));
+            return ResponseEntity.ok(new LoginResponse(usr.get().getId()));
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }

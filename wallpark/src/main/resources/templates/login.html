@@ -93,45 +93,40 @@
     </div>
   </body>
   <script>
-    var form = document.getElementById("formLogin");
-    form.addEventListener("submit", async function(event) {
-        event.preventDefault();
-        const email = document.getElementById("email").value;
-        const senha = document.getElementById("senha").value;
-        const usr = { email: email, senha: senha };
-          fetch("http://localhost:8080/login", {
-            method: "POST",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify(usr),
-          })
-          .then(async response =>{
-            if(response.status === 404) throw new Error('Email ou senha incorretos');
-            if(response.ok){
-              const data = await response.json();
-              console.log(data.accessToken)
-              window.localStorage.setItem('token', data.accessToken);
-              const responseToken = await fetch(`http://localhost:8080/init/${data.id}`, {
-                method: "GET",
-                headers: {
-                  "Authorization": `Bearer ${data.accessToken}`,
-                  "Content-type": "application/json"
-                },
-                credentials: "include"
-              })
-              if(responseToken.ok){
-                console.log('resposeToken feito')
-                window.location.href = `http://localhost:8080/init/${data.id}`
-              }
-        
-            }
-          })
-          .then(data =>{
-            console.log('login realizado')
+  var form = document.getElementById("formLogin");
 
-            alert("login realizado com sucesso")
-          }).catch(error =>{
-            alert("erro ao logar: "+ error.message)
-          });
-    });
+form.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const email = document.getElementById("email").value;
+    const senha = document.getElementById("senha").value;
+    const usr = { email: email, senha: senha };
+
+    try {
+        // Primeira requisição para fazer login
+        const response = await fetch("http://localhost:8080/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(usr),
+        });
+
+        if (response.status === 404) {
+            throw new Error('Email ou senha incorretos');
+        }
+
+        if (!response.ok) {
+            throw new Error(`Erro ao tentar login: ${response.statusText}`);
+        }        
+        const data = await response.json();
+      
+        window.location.href = `http://localhost:8080/init/${data.id}`;
+
+
+
+    } catch (error) {
+        alert("Erro ao logar: " + error.message);
+    }
+});
+
   </script>
 </html>

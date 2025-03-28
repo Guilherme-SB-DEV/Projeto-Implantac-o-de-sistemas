@@ -1,5 +1,7 @@
 package br.com.example.wallpark.models;
 
+import java.time.LocalDateTime;
+
 import br.com.example.wallpark.utils.Porte;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,13 +21,23 @@ public class Carro {
     @Column(name = "placa")
     private String placa;
     private String modelo;
+    private int ano;
     @Enumerated(EnumType.STRING)
     private Porte porte;
     
     @OneToOne
     @JoinColumn(name = "vaga_id")
     private Vaga vaga;
+    
+    private Double total;
 
+    
+    private LocalDateTime tempo;
+
+    public Carro(){
+        this.tempo = LocalDateTime.now();
+    }
+    
     public int getId() {
         return id;
     }
@@ -38,7 +50,6 @@ public class Carro {
     public void setVaga(Vaga vaga) {
         this.vaga = vaga;
     }
-    private Double total;
     
     
     
@@ -54,7 +65,6 @@ public class Carro {
     public void setTotal(Double total) {
         this.total = total;
     }
-    private int ano;
     public String getPlaca() {
         return placa;
     }
@@ -72,6 +82,12 @@ public class Carro {
     }
     public void setAno(int ano) {
         this.ano = ano;
+    }
+    public LocalDateTime getTempo() {
+        return tempo;
+    }
+    public void setTempo(LocalDateTime tempo) {
+        this.tempo = tempo;
     }
     
 }

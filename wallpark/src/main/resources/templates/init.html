@@ -10,22 +10,33 @@
         background-color: #f4f4f9;
         margin: 0;
       }
+      .carParked{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        gap: 50px;
+      }
       header {
         background-color: #4caf50;
         color: white;
         padding: 15px 0;
         text-align: center;
       }
+
       header h1 {
         margin: 0;
       }
+
       .container {
         display: flex;
         justify-content: center;
         align-items: flex-start;
         padding: 20px;
-        margin-bottom: 10px;
+        margin-bottom: 100px;
       }
+
       .sidebar {
         background-color: white;
         width: 250px;
@@ -35,10 +46,12 @@
         margin-right: 20px;
         flex-shrink: 0;
       }
+
       .sidebar h2 {
         font-size: 18px;
         color: #333;
       }
+
       .sidebar a {
         display: block;
         color: #4caf50;
@@ -47,10 +60,12 @@
         text-decoration: none;
         border-bottom: 1px solid #ddd;
       }
+
       .sidebar a:hover {
         background-color: #f1f1f1;
         border-radius: 4px;
       }
+
       .content {
         flex-grow: 1;
         background-color: white;
@@ -58,27 +73,92 @@
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       }
+
       .content h2 {
         font-size: 24px;
         margin-bottom: 20px;
         color: #333;
       }
-      .card {
-        background-color: white;
-        padding: 15px;
-        margin-bottom: 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+      .form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        max-width: 600px;
+        margin: auto;
       }
-      .card h3 {
-        font-size: 18px;
-        margin-bottom: 10px;
+
+      .form h2 {
+        text-align: center;
+        font-size: 24px;
         color: #333;
       }
-      .card p {
+
+      label {
         font-size: 16px;
-        color: #555;
+        margin-bottom: 8px;
+        color: #333;
       }
+
+      input,
+      select,
+      button {
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        transition: border 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      input:focus,
+      select:focus {
+        border: 1px solid #4caf50;
+        box-shadow: 0 0 5px rgba(76, 175, 80, 0.6);
+        outline: none;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      select,
+      input[type="text"] {
+        width: 100%;
+      }
+
+      select {
+        height: 50px;
+        font-size: 16px;
+      }
+
+      #addCar,
+      #addVaga {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      /* Efeito de hover para os campos de seleção e input */
+      input:hover,
+      select:hover {
+        border: 1px solid #4caf50;
+      }
+
+      /* Estilo para o botão de submit */
+      button[type="submit"] {
+        width: 100%;
+        padding: 14px;
+        font-size: 18px;
+      }
+
       footer {
         background-color: #4caf50;
         color: white;
@@ -88,59 +168,39 @@
         bottom: 0;
         width: 100%;
       }
+
       footer a {
         color: white;
         text-decoration: none;
       }
-      table {
-        width: 100%;
-        border-collapse: collapse;
+
+      /* Estilo dos inputs de placa */
+      #placa {
+        text-transform: uppercase;
       }
-      th,
-      td {
-        padding: 10px;
-        text-align: center;
-        border: 1px solid #ddd;
-      }
-      .vaga-livre {
-        background-color: #4caf50; /* Verde */
-        color: white;
-        cursor: pointer;
-      }
-      .vaga-ocupada {
-        background-color: #f44336; /* Vermelho */
-        color: white;
-        cursor: not-allowed;
-      }
-      .vaga-selecionada {
-        background-color: #ff9800; /* Laranja */
-      }
+
+      /* Ajuste no layout dos campos de formulário */
       .form {
+        gap: 20px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      #list-car {
         display: flex;
-        height: 500px;
         flex-direction: column;
         justify-content: center;
         align-items: center;
       }
-      #addCar,
-      #addVaga {
-        width: 50%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-      #placa,
-      #vaga,
-      #piso,
-      #porte {
-        height: 50px;
-        font-size: 32pt;
-      }
-      #placa {
-        text-transform: uppercase;
+      #delete{
+        background-color: red;
       }
     </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
   </head>
   <body>
     <header>
@@ -148,33 +208,25 @@
     </header>
 
     <div class="container">
-      <!-- Sidebar -->
-      <div class="sidebar">
-        <h2>Menu</h2>
-        <a href="#">Visão Geral</a>
-        <a href="#">Estacionamentos</a>
-        <a href="#">Veículos</a>
-        <a href="#">Relatórios</a>
-        <a href="#">Sair</a>
-      </div>
-
       <!-- Main Content -->
       <div class="content">
-        <h2>Bem-vindo, <span th:text="${usr.nome}"></span>!</h2>
         <div class="form">
+          <h2>Bem-vindo, <span th:text="${usr.nome}"></span>!</h2>
           <h2>Adicionar Carro à vaga</h2>
           <form id="addCar">
             <label for="vaga">Vaga:</label>
             <select id="vaga" name="vaga">
-              <option th:each="vaga : ${vagas}" th:value="${vaga.id}" th:text ="'vaga: '+ ${vaga.id}"></option>
+              <option
+                th:each="vaga : ${vagasLivres}"
+                th:value="${vaga.id}"
+                th:text="${vaga.id}"
+              ></option>
             </select>
-
             <select name="porteCarro" id="porteCarro">
               <option value="PEQUENO">Pequeno</option>
               <option value="MEDIO">Medio</option>
               <option value="GRANDE">Grande</option>
             </select>
-
 
             <label for="placa">Placa:</label>
             <input
@@ -185,10 +237,20 @@
               maxlength="8"
               required
             />
+            <label for="modelo">Moldelo:</label>
+            <input
+              type="text"
+              id="modelo"
+              name="modelo"
+              required
+            />
+            <label for="ano">Escolha o ano:</label>
+            <select id="ano" name="ano"></select>
 
-            <button type="submit" id="addCarroSubmit">Adicionar</button>
+            <button type="submit" >Adicionar</button>
           </form>
         </div>
+
         <div class="form">
           <h2>Adicionar vaga</h2>
           <form id="addVaga">
@@ -207,9 +269,22 @@
             <button type="submit">Adicionar</button>
           </form>
         </div>
+        <div class="content" id="list-car">
+          <div th:each="car : ${carros}">
+          <div class="carParked">
+            <i class="fa fa-car" aria-hidden="true"></i>
+            <p th:text="'Placa: '+ ${car.placa}"></p>
+            <p th:text="'Porte: '+${car.porte}"></p>
+            <p th:text="'Modelo: '+${car.modelo}"></p>
+            <p th:text="'Ano: '+${car.ano}"></p>
+            <p th:text="'vaga: '+${car.getVaga().getId()}"></p>
+            <button type="button">Pagar</button>
+            <button type="button" id="delete">Excluir</button>
+          </div>
+          </div>
+        </div>
       </div>
     </div>
-
     <footer>
       <p>
         &copy; 2025 WallPark - Todos os direitos reservados. |
@@ -218,6 +293,17 @@
     </footer>
   </body>
   <script>
+    const ano = document.getElementById("ano");
+    const anoAtual = new Date().getFullYear(); // Pega o ano atual
+    const startYear = 1900; // Ano de início
+
+    for (let year = anoAtual; year >= startYear; year--) {
+      const option = document.createElement("option");
+      option.value = year;
+      option.textContent = year;
+      ano.appendChild(option);
+    }
+
     var addvaga = document.getElementById("addVaga");
     var addCar = document.getElementById("addCar");
     addvaga.addEventListener("submit", function (event) {
@@ -225,54 +311,70 @@
       event.preventDefault();
       const porte = document.getElementById("porte").value;
       const piso = document.getElementById("piso").value;
-      const vaga = document.getElementById("vaga").value
-      const cadastro = {piso: piso, porte: porte, "vaga_id": vaga};
+      const vaga = document.getElementById("vaga").value;
+      const cadastro = { piso: piso, porte: porte, vaga_id: vaga };
       fetch("http://localhost:8080/cadVaga", {
         method: "POST",
         headers: {
           Accept: "application/json", // Aceita resposta em JSON
           "Content-Type": "application/json", // Envia dados em formato JSON
         },
+        credentials: "include",
         body: JSON.stringify(cadastro), // Envia os dados como JSON
       })
-        .then((response) => {
-          if (response.ok) {
-            alert("Vaga cadastrada com sucesso!");
-          } else {
-            alert("Erro ao cadastrar vaga! Status: " + response.status);
+      .then((response) => {
+        if (response.ok) {
+          alert("Vaga cadastrada com sucesso!");
+        } else {
+          alert("Erro ao cadastrar vaga! Status: " + response.status);
           }
         })
         .catch((err) => alert("Erro ao cadastrar vaga: " + err.message));
-    });
-    function aplicarMascara(campo) {
-      var valor = campo.value;
+      });
+      function aplicarMascara(campo) {
+        var valor = campo.value;
       valor = valor
         .replace(/[^A-Za-z0-9]/g, "")
         .replace(/([A-Za-z0-9]{3})([A-Za-z0-9])/, "$1-$2");
-      campo.value = valor;
-    }
-    addCar.addEventListener("submit", function(event){
-      const vaga = document.getElementById("vaga").value;
-      const porte = document.getElementById("porteCarro").value
-      const placa = document.getElementById("placa").value
-      var carro = {"vaga": vaga, "porte": porte, "placa": placa};
-      fetch("http://localhost:8080/cadCar", {
-        method:"POST",
-        headers:{
-          Accept: "aplication/json",
-          "Content-Type": "aplication/json"
+        campo.value = valor;
+      }
+      addCar.addEventListener("submit", function (event) {
+        console.log('chamando')
+        event.preventDefault()
+        const vaga = document.getElementById("vaga").value;
+        const porte = document.getElementById("porteCarro").value;
+        const placa = document.getElementById("placa").value;
+        const ano = document.getElementById("ano").value
+        const modelo = document.getElementById("modelo").value
+        var carro = { placa: placa, modelo: modelo, ano: ano, porte: porte, vaga_id: vaga, total: 0.00};
+        var dados = {
+          carro: carro,
+          id: vaga
+        } 
+        console.log(carro);
+        fetch("http://localhost:8080/cadCar", {
+          method: "POST",
+          headers: {
+            Accept: "aplication/json",
+            "Content-Type": "application/json", // Envia dados em formato JSON
         },
-        body: JSON.stringify()
+        credentials: "include",
+        body: JSON.stringify(dados),
+      }).then((data)=>{
+        console.log("encaminhando resposta")
       })
-      .then(response =>{
-        if(response.ok){
-          alert("carro cadastrado com sucesso!")
-        }
-      })
-      .catch(error=>{
-        alert("erro ao cadastrar carro: "+error)
-      })
-
-    })
+        .then((response) => {
+          console.log("encaminhando resposta")
+          if (response.ok) {
+            alert("carro cadastrado com sucesso!");
+          }
+        })
+        .catch((error) => {
+          alert("erro ao cadastrar carro: " + error);
+        });
+    });
+  
+  
+  
   </script>
 </html>
