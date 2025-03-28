@@ -244,6 +244,8 @@
               name="modelo"
               required
             />
+            <label for="marca">Marca:</label>
+            <input type="text" id="marca" name="marca" required>
             <label for="ano">Escolha o ano:</label>
             <select id="ano" name="ano"></select>
 
@@ -312,7 +314,7 @@
       const porte = document.getElementById("porte").value;
       const piso = document.getElementById("piso").value;
       const vaga = document.getElementById("vaga").value;
-      const cadastro = { piso: piso, porte: porte, vaga_id: vaga };
+      const cadastro = { piso: piso, porte: porte, vaga_id: vaga,};
       fetch("http://localhost:8080/cadVaga", {
         method: "POST",
         headers: {
@@ -327,13 +329,13 @@
           alert("Vaga cadastrada com sucesso!");
         } else {
           alert("Erro ao cadastrar vaga! Status: " + response.status);
-          }
-        })
-        .catch((err) => alert("Erro ao cadastrar vaga: " + err.message));
-      });
+        }
+      })
+      .catch((err) => alert("Erro ao cadastrar vaga: " + err.message));
+    });
       function aplicarMascara(campo) {
         var valor = campo.value;
-      valor = valor
+        valor = valor
         .replace(/[^A-Za-z0-9]/g, "")
         .replace(/([A-Za-z0-9]{3})([A-Za-z0-9])/, "$1-$2");
         campo.value = valor;
@@ -346,7 +348,8 @@
         const placa = document.getElementById("placa").value;
         const ano = document.getElementById("ano").value
         const modelo = document.getElementById("modelo").value
-        var carro = { placa: placa, modelo: modelo, ano: ano, porte: porte, vaga_id: vaga, total: 0.00};
+        const marca = document.getElementById("marca").value;
+        var carro = { placa: placa, modelo: modelo, ano: ano, porte: porte, vaga_id: vaga, marca: marca, total: 0.00};
         var dados = {
           carro: carro,
           id: vaga

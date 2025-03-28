@@ -1,1 +1,28 @@
-valor: -10.0
+NOTA FISCAL 
+Data de Emissão: 29/03/2025
+
+Emitente:
+Nome: Estacionamento WallPark LTDA
+CNPJ: 12.345.678/0001-90
+Endereço: Rua Almirante, 123 - Salvador, BA, CEP 01000-000
+Telefone: (11) 1234-5678
+
+Destinatário:
+Nome: João da Silva
+CPF: 987.654.321-00
+Endereço: Rua Cliente, 456 - São Paulo, SP, CEP 02000-000
+Telefone: (11) 98765-4321
+
+Descrição do Serviço:
+
+Código   Descrição                    Quantidade   Preço Unitário   Total
+----------------------------------------------------------------------
+001      Estacionamento (pernoite)    1            R$ 30,00         R$ 30,00
+
+Total dos Serviços: R$ 35,00
+Desconto: R$ 0,00
+
+Total Geral: R$ 35,00
+
+Forma de Pagamento: Dinheiro
+Vencimento: 29/03/2025

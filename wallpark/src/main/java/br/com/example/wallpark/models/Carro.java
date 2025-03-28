@@ -20,74 +20,91 @@ public class Carro {
     private int id;
     @Column(name = "placa")
     private String placa;
+    private String marca;
     private String modelo;
     private int ano;
     @Enumerated(EnumType.STRING)
     private Porte porte;
-    
     @OneToOne
     @JoinColumn(name = "vaga_id")
     private Vaga vaga;
-    
     private Double total;
-
-    
     private LocalDateTime tempo;
 
-    public Carro(){
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public Carro() {
         this.tempo = LocalDateTime.now();
     }
-    
+
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public Vaga getVaga() {
         return vaga;
     }
+
     public void setVaga(Vaga vaga) {
         this.vaga = vaga;
     }
-    
-    
-    
+
     public Porte getPorte() {
         return porte;
     }
+
     public void setPorte(Porte porte) {
         this.porte = porte;
     }
+
     public Double getTotal() {
         return total;
     }
+
     public void setTotal(Double total) {
         this.total = total;
     }
+
     public String getPlaca() {
         return placa;
     }
+
     public void setPlaca(String placa) {
         this.placa = placa;
     }
+
     public String getModelo() {
         return modelo;
     }
+
     public void setModelo(String modelo) {
         this.modelo = modelo;
     }
+
     public int getAno() {
         return ano;
     }
+
     public void setAno(int ano) {
         this.ano = ano;
     }
+
     public LocalDateTime getTempo() {
         return tempo;
     }
+
     public void setTempo(LocalDateTime tempo) {
         this.tempo = tempo;
     }
-    
+
 }
