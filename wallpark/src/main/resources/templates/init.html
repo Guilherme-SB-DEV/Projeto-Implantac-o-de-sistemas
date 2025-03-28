@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br"xmlns:th="http://www.thymeleaf.org"></html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -280,7 +280,12 @@
             <p th:text="'Modelo: '+${car.modelo}"></p>
             <p th:text="'Ano: '+${car.ano}"></p>
             <p th:text="'vaga: '+${car.getVaga().getId()}"></p>
-            <button type="button">Pagar</button>
+            <a th:href="@{/payment(id=${car.id})}">
+
+              <button type="button">Pagar</button>
+
+            </a>
+
             <button type="button" id="delete">Excluir</button>
           </div>
           </div>
