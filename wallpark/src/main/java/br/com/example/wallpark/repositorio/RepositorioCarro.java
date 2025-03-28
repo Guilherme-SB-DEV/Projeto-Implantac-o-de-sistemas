@@ -8,7 +8,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import br.com.example.wallpark.models.Carro;
-import java.util.List;
 
 
 @Repository

@@ -2,7 +2,6 @@ package br.com.example.wallpark.controllers.pagamento;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.example.wallpark.controllers.pagamento.dtos.PagamentoResponse;
 import br.com.example.wallpark.models.Carro;
 import br.com.example.wallpark.repositorio.RepositorioCarro;
 
@@ -10,14 +9,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.text.SimpleDateFormat;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.GregorianCalendar;
-import java.util.Locale;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class PagamentoController {
     @Autowired
     private RepositorioCarro repositorioCarro;
-    private static final String TIME_ZONE = "America/Sao_Paulo";
 
     @GetMapping("/payment")
     public ResponseEntity<InputStreamResource> payment(@RequestParam Integer id) throws IOException {
