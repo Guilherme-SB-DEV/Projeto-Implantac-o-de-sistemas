@@ -196,6 +196,9 @@
       #delete{
         background-color: red;
       }
+      .void{
+        width: 50px;
+      }
     </style>
     <link
       rel="stylesheet"
@@ -214,12 +217,12 @@
           <h2>Bem-vindo, <span th:text="${usr.nome}"></span>!</h2>
           <h2>Adicionar Carro à vaga</h2>
           <form id="addCar">
-            <label for="vaga">Vaga:</label>
+            <label for="vaga">Vagas Disponiveis:</label>
             <select id="vaga" name="vaga">
               <option
                 th:each="vaga : ${vagasLivres}"
                 th:value="${vaga.id}"
-                th:text="${vaga.id}"
+                th:text="'Id: '+${vaga.id}+' | Piso: '+${vaga.piso}+' | Tamanho: '+${vaga.porte}+' | coordenadas: '+${vaga.coordenadas}"
               ></option>
             </select>
             <select name="porteCarro" id="porteCarro">
@@ -268,7 +271,169 @@
               <option value="4">Piso 4</option>
               <option value="5">Piso 5</option>
             </select>
-            <button type="submit">Adicionar</button>
+            <table onclick="getCoordenadas(event)">
+              <tr>
+                  <td>
+                      <input type="radio" name="botao" value="1,1" id="botao1">
+                      <label for="botao1">
+                          <i class="fa fa-car" aria-hidden="true"></i> 1,1
+                      </label>
+                  </td>
+                  <td>
+                      <input type="radio" name="botao" value="1,2" id="botao2">
+                      <label for="botao2">
+                          <i class="fa fa-car" aria-hidden="true"></i> 1,2
+                      </label>
+                  </td>
+                  <td class="void"></td>
+                  <td>
+                      <input type="radio" name="botao" value="1,3" id="botao3">
+                      <label for="botao3">
+                          <i class="fa fa-car" aria-hidden="true"></i> 1,3
+                      </label>
+                  </td>
+                  <td>
+                      <input type="radio" name="botao" value="1,4" id="botao4">
+                      <label for="botao4">
+                          <i class="fa fa-car" aria-hidden="true"></i> 1,4
+                      </label>
+                  </td>
+                  <td class="void"></td>
+                  <td>
+                      <input type="radio" name="botao" value="1,5" id="botao5">
+                      <label for="botao5">
+                          <i class="fa fa-car" aria-hidden="true"></i> 1,5
+                      </label>
+                  </td>
+                  <td>
+                      <input type="radio" name="botao" value="1,6" id="botao6">
+                      <label for="botao6">
+                          <i class="fa fa-car" aria-hidden="true"></i> 1,6
+                      </label>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <input type="radio" name="botao" value="2,1" id="botao7">
+                      <label for="botao7">
+                          <i class="fa fa-car" aria-hidden="true"></i> 2,1
+                      </label>
+                  </td>
+                  <td>
+                      <input type="radio" name="botao" value="2,2" id="botao8">
+                      <label for="botao8">
+                          <i class="fa fa-car" aria-hidden="true"></i> 2,2
+                      </label>
+                  </td>
+                  <td class="void"></td>
+                  <td>
+                      <input type="radio" name="botao" value="2,3" id="botao9">
+                      <label for="botao9">
+                          <i class="fa fa-car" aria-hidden="true"></i> 2,3
+                      </label>
+                  </td>
+                  <td>
+                      <input type="radio" name="botao" value="2,4" id="botao10">
+                      <label for="botao10">
+                          <i class="fa fa-car" aria-hidden="true"></i> 2,4
+                      </label>
+                  </td>
+                  <td class="void"></td>
+                  <td>
+                      <input type="radio" name="botao" value="2,5" id="botao11">
+                      <label for="botao11">
+                          <i class="fa fa-car" aria-hidden="true"></i> 2,5
+                      </label>
+                  </td>
+                  <td>
+                      <input type="radio" name="botao" value="2,6" id="botao12">
+                      <label for="botao12">
+                          <i class="fa fa-car" aria-hidden="true"></i> 2,6
+                      </label>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <input type="radio" name="botao" value="3,1" id="botao13">
+                      <label for="botao13">
+                          <i class="fa fa-car" aria-hidden="true"></i> 3,1
+                      </label>
+                  </td>
+                  <td>
+                      <input type="radio" name="botao" value="3,2" id="botao14">
+                      <label for="botao14">
+                          <i class="fa fa-car" aria-hidden="true"></i> 3,2
+                      </label>
+                  </td>
+                  <td class="void"></td>
+                  <td>
+                      <input type="radio" name="botao" value="3,3" id="botao15">
+                      <label for="botao15">
+                          <i class="fa fa-car" aria-hidden="true"></i> 3,3
+                      </label>
+                  </td>
+                  <td>
+                      <input type="radio" name="botao" value="3,4" id="botao16">
+                      <label for="botao16">
+                          <i class="fa fa-car" aria-hidden="true"></i> 3,4
+                      </label>
+                  </td>
+                  <td class="void"></td>
+                  <td>
+                      <input type="radio" name="botao" value="3,5" id="botao17">
+                      <label for="botao17">
+                          <i class="fa fa-car" aria-hidden="true"></i> 3,5
+                      </label>
+                  </td>
+                  <td>
+                      <input type="radio" name="botao" value="3,6" id="botao18">
+                      <label for="botao18">
+                          <i class="fa fa-car" aria-hidden="true"></i> 3,6
+                      </label>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <input type="radio" name="botao" value="4,1" id="botao19">
+                      <label for="botao19">
+                          <i class="fa fa-car" aria-hidden="true"></i> 4,1
+                      </label>
+                  </td>
+                  <td>
+                      <input type="radio" name="botao" value="4,2" id="botao20">
+                      <label for="botao20">
+                          <i class="fa fa-car" aria-hidden="true"></i> 4,2
+                      </label>
+                  </td>
+                  <td class="void"></td>
+                  <td>
+                      <input type="radio" name="botao" value="4,3" id="botao21">
+                      <label for="botao21">
+                          <i class="fa fa-car" aria-hidden="true"></i> 4,3
+                      </label>
+                  </td>
+                  <td>
+                      <input type="radio" name="botao" value="4,4" id="botao22">
+                      <label for="botao22">
+                          <i class="fa fa-car" aria-hidden="true"></i> 4,4
+                      </label>
+                  </td>
+                  <td class="void"></td>
+                  <td>
+                      <input type="radio" name="botao" value="4,5" id="botao23">
+                      <label for="botao23">
+                          <i class="fa fa-car" aria-hidden="true"></i> 4,5
+                      </label>
+                  </td>
+                  <td>
+                      <input type="radio" name="botao" value="4,6" id="botao24">
+                      <label for="botao24">
+                          <i class="fa fa-car" aria-hidden="true"></i> 4,6
+                      </label>
+                  </td>
+              </tr>
+            </table>
+            <button type="submit" id="addVaga">Adicionar</button>
           </form>
         </div>
         <div class="content" id="list-car">
@@ -279,16 +444,20 @@
             <p th:text="'Porte: '+${car.porte}"></p>
             <p th:text="'Modelo: '+${car.modelo}"></p>
             <p th:text="'Ano: '+${car.ano}"></p>
-            <p th:text="'vaga: '+${car.getVaga().getId()}"></p>
-            <a th:href="@{/payment(id=${car.id})}">
-
-              <button type="button">Pagar</button>
-
+            <p th:text="'vaga: '+${car.getVaga().getCoordenadas()}"></p>
+            <a th:href="@{/ticket(id=${car.getVaga().getId()})}">
+              <button type="button">
+                Ticket
+              </button>
             </a>
-
-            <button type="button" id="delete">Excluir</button>
+            <a th:href="@{/payment(id=${car.id})}">
+              <button type="button">Pagar</button>
+              
+            </a>
+            <button type="button" th:onclick="'delCar(' + ${car.id} + ')'" id="delete">Excluir</button>
           </div>
-          </div>
+        </div>
+      </div>
         </div>
       </div>
     </div>
@@ -303,6 +472,9 @@
     const ano = document.getElementById("ano");
     const anoAtual = new Date().getFullYear(); // Pega o ano atual
     const startYear = 1900; // Ano de início
+    var index = null;
+    var addvaga = document.getElementById("addVaga");
+    var addCar = document.getElementById("addCar");
 
     for (let year = anoAtual; year >= startYear; year--) {
       const option = document.createElement("option");
@@ -311,33 +483,10 @@
       ano.appendChild(option);
     }
 
-    var addvaga = document.getElementById("addVaga");
-    var addCar = document.getElementById("addCar");
-    addvaga.addEventListener("submit", function (event) {
-      console.log("tá cahamdno a função");
-      event.preventDefault();
-      const porte = document.getElementById("porte").value;
-      const piso = document.getElementById("piso").value;
-      const vaga = document.getElementById("vaga").value;
-      const cadastro = { piso: piso, porte: porte, vaga_id: vaga,};
-      fetch("http://localhost:8080/cadVaga", {
-        method: "POST",
-        headers: {
-          Accept: "application/json", // Aceita resposta em JSON
-          "Content-Type": "application/json", // Envia dados em formato JSON
-        },
-        credentials: "include",
-        body: JSON.stringify(cadastro), // Envia os dados como JSON
-      })
-      .then((response) => {
-        if (response.ok) {
-          alert("Vaga cadastrada com sucesso!");
-        } else {
-          alert("Erro ao cadastrar vaga! Status: " + response.status);
-        }
-      })
-      .catch((err) => alert("Erro ao cadastrar vaga: " + err.message));
-    });
+ 
+    
+    
+    
       function aplicarMascara(campo) {
         var valor = campo.value;
         valor = valor
@@ -346,7 +495,6 @@
         campo.value = valor;
       }
       addCar.addEventListener("submit", function (event) {
-        console.log('chamando')
         event.preventDefault()
         const vaga = document.getElementById("vaga").value;
         const porte = document.getElementById("porteCarro").value;
@@ -369,20 +517,84 @@
         credentials: "include",
         body: JSON.stringify(dados),
       }).then((data)=>{
-        console.log("encaminhando resposta")
+        switch (data.status) {
+          case 200:
+            alert("Carro cadastrado com sucesso!");
+            break;
+          case 409:
+            alert("Carro já cadastrado!")
+            break;
+          case 406:
+            alert("Vaga não suporta o porte do carro cadastrado!")
+            break;
+        
+          default:
+            break;
+        }
       })
-        .then((response) => {
-          console.log("encaminhando resposta")
-          if (response.ok) {
-            alert("carro cadastrado com sucesso!");
-          }
-        })
         .catch((error) => {
+          // if(response.status(409)){
+          //   alert("Vaga não suporta o porte do carro cadastrado!")
+          // }
           alert("erro ao cadastrar carro: " + error);
         });
     });
   
-  
-  
+    function delCar(id) {
+      var confirm = window.confirm("Tem certeza que deseja deletar esse registro?")
+      if(confirm.valueOf() == true) {
+        fetch(`http://localhost:8080/delCar?id=${id}`, {
+          method: "POST",
+        })
+         .then((response) => {
+            if (response.ok) {
+              alert("Carro excluído com sucesso!");
+              location.reload();
+            } else {
+              alert("Erro ao excluir carro! Status: " + response.status);
+            }
+          })
+         .catch((err) => alert("Erro ao excluir carro: " + err.message));
+      }
+    }
+    
+    
+    
+    addvaga.addEventListener("submit", function (event) {
+      console.log("tá cahamdno a função");
+      event.preventDefault();
+      const porte = document.getElementById("porte").value;
+      const piso = document.getElementById("piso").value;
+      const vaga = document.getElementById("vaga").value;
+      const cadastro = { piso: piso, porte: porte, vaga_id: vaga, coordenadas: index};
+      fetch("http://localhost:8080/cadVaga", {
+        method: "POST",
+        headers: {
+          Accept: "application/json", // Aceita resposta em JSON
+          "Content-Type": "application/json", // Envia dados em formato JSON
+        },
+        credentials: "include",
+        body: JSON.stringify(cadastro), // Envia os dados como JSON
+      })
+      .then((response) => {
+        if (response.ok) {
+          alert("Vaga cadastrada com sucesso!");
+          location.reload();
+        } else {
+          alert("Erro ao cadastrar vaga! Status: " + response.status);
+        }
+      })
+      .catch((err) => alert("Erro ao cadastrar vaga: " + err.message));
+    });
+
+
+    var coordenadas = document.getElementById("coordenadas");
+    function getCoordenadas(event){
+      if(event.target.type==='radio'){
+        index = event.target.value;      
+      }
+    }
+    
+
   </script>
 </html>

@@ -25,8 +25,8 @@ public class Carro {
     private int ano;
     @Enumerated(EnumType.STRING)
     private Porte porte;
-    @OneToOne
-    @JoinColumn(name = "vaga_id")
+    @OneToOne()
+    @JoinColumn(name = "vaga_id" , referencedColumnName = "id", nullable = true)
     private Vaga vaga;
     private Double total;
     private LocalDateTime tempo;

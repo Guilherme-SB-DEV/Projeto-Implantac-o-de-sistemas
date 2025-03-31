@@ -91,7 +91,7 @@ public class PagamentoController {
 
         InputStreamResource resource = new InputStreamResource(inputStream);
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=arquivo-gerado.txt")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=nota-fiscal.txt")
                 .contentType(MediaType.TEXT_PLAIN)
                 .contentLength(fileContent.length)
                 .body(resource);
