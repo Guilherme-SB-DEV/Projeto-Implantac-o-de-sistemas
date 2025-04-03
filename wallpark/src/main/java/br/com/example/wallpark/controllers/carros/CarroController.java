@@ -40,8 +40,6 @@ public class CarroController {
             (vaga.get().getPorte().toString().equals("MEDIO") && carro.getPorte().toString().equals("GRANDE"))) {
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
         }
-        System.out.println(vaga.get().getPorte());
-        System.out.println(carro.getPorte());
         carroRequest.carro().setVaga(vaga.get());
         repositorio.save(carroRequest.carro());
         return ResponseEntity.status(200).build();

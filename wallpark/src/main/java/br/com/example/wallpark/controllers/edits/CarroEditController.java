@@ -35,7 +35,6 @@ public class CarroEditController {
             Optional<Carro> carro = repositorioCarro.findById(request.id());
 
             if (carro.isPresent()) {
-                System.out.println(request.value());
                 switch (request.field()) {
                     case "placa":
                         carro.get().setPlaca(request.value());
@@ -63,7 +62,6 @@ public class CarroEditController {
                                     }
                                     
                                 }
-                                System.out.println("CHEGOU AQUI --------------------------------");
                                 repositorioCarro.updateVaga(Integer.parseInt(request.value()), carro.get().getId());
                                 return ResponseEntity.status(HttpStatus.OK).build();
                             }

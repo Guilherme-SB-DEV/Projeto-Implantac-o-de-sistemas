@@ -27,6 +27,12 @@ public class VagaController {
 
     @PostMapping("/cadVaga")
     public ResponseEntity<Vaga> cadVaga(@RequestBody Vaga vaga) {
+        Iterable<Vaga> vagaList = repositorio.findAll();
+        for(Vaga vagaEach : vagaList){
+            if(vaga.getCoordenadas().equals(vagaEach.getCoordenadas())){
+                return ResponseEntity.status(HttpStatus.CONFLICT).build();
+            }
+        } 
         repositorio.save(vaga);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
