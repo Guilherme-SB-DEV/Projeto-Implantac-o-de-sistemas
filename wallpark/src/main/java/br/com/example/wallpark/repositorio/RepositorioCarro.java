@@ -20,7 +20,8 @@ public interface RepositorioCarro extends CrudRepository<Carro, Integer>{
     @Modifying
     @Query(value= "DELETE FROM carro WHERE id = :id", nativeQuery= true)
     void delCar(@Param("id") int id);
-
-    @Query(value= "UPDATE carro SET id_VAGA = :id_vaga WHERE id = :id", nativeQuery= true)
+    
+    @Modifying
+    @Query(value= "UPDATE carro SET vaga_id = :id_vaga WHERE id = :id", nativeQuery= true)
     void updateVaga(@Param("id_vaga") Integer id_vaga, @Param("id") Integer id);
 }

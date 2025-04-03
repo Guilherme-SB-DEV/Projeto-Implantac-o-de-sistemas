@@ -4,11 +4,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.example.wallpark.controllers.edits.dtos.EditRequest;
 import br.com.example.wallpark.models.Carro;
-import br.com.example.wallpark.models.Vaga;
 import br.com.example.wallpark.repositorio.RepositorioCarro;
 import br.com.example.wallpark.repositorio.RepositorioVaga;
 import br.com.example.wallpark.utils.Porte;
 import br.com.example.wallpark.utils.ValidInteger;
+import jakarta.transaction.Transactional;
 
 import java.util.Optional;
 
@@ -24,30 +24,47 @@ public class CarroEditController {
     private RepositorioCarro repositorioCarro;
     @Autowired
     private RepositorioVaga repositorioVaga;
+    @Autowired
     private ValidInteger validate;
 
+    @Transactional
     @PostMapping("/edit")
     public ResponseEntity<Void> edit(@RequestBody EditRequest request) {
-        if (request.mode() == "carro") {
+
+  
             Optional<Carro> carro = repositorioCarro.findById(request.id());
+
             if (carro.isPresent()) {
+                System.out.println(request.value());
                 switch (request.field()) {
                     case "placa":
-                        carro.get().setPlaca(request.edit());
+                        carro.get().setPlaca(request.value());
+                        repositorioCarro.save(carro.get());
                         return ResponseEntity.status(HttpStatus.OK).build();
                     case "modelo":
-                        carro.get().setModelo(request.edit());
+                        carro.get().setModelo(request.value());
+                        repositorioCarro.save(carro.get());
                         return ResponseEntity.status(HttpStatus.OK).build();
                     case "porte":
-                        carro.get().setPorte(Porte.valueOf(request.edit()));
+                        carro.get().setPorte(Porte.valueOf(request.value()));
+                        repositorioCarro.save(carro.get());
                         return ResponseEntity.status(HttpStatus.OK).build();
                     case "ano":
-                        carro.get().setAno(Integer.parseInt(request.edit()));
+                        carro.get().setAno(Integer.parseInt(request.value()));
+                        repositorioCarro.save(carro.get());
                         return ResponseEntity.status(HttpStatus.OK).build();
-                    case "vaga_id":
-                        if (validate.isValidInteger(request.edit())) {
-                            if (repositorioVaga.findById(Integer.parseInt(request.edit())).isPresent()) {
-                                repositorioCarro.updateVaga(Integer.parseInt(request.edit()), carro.get().getId());
+                    case "id_vaga":
+                        if (validate.isValidInteger(request.value())) {
+                            if (repositorioVaga.findById(Integer.parseInt(request.value())).isPresent()) {
+                                Iterable<Carro> carros = repositorioCarro.findAll();
+                                for(Carro carroItem : carros){
+                                    if(carroItem.getVaga().getId() == Integer.parseInt(request.value())){
+                                        return ResponseEntity.status(HttpStatus.CONFLICT).build();
+                                    }
+                                    
+                                }
+                                System.out.println("CHEGOU AQUI --------------------------------");
+                                repositorioCarro.updateVaga(Integer.parseInt(request.value()), carro.get().getId());
                                 return ResponseEntity.status(HttpStatus.OK).build();
                             }
                         }
@@ -57,33 +74,6 @@ public class CarroEditController {
                 }
             }
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        if (request.mode() == "vaga") {
-            Optional<Vaga> vaga = repositorioVaga.findById(request.id());
-            if (vaga.isPresent()) {
-                switch (request.field()) {
-                    case "porte":
-                        vaga.get().setPorte(Porte.valueOf(request.edit()));
-                        return ResponseEntity.status(HttpStatus.OK).build();
-                    case "coordenadas":
-                        if (validate.isValidInteger(Character.toString(request.edit().charAt(0))) &&
-                            validate.isValidInteger(Character.toString(request.edit().charAt(2)))) {
-                            vaga.get().setCoordenadas(request.edit());
-                            return ResponseEntity.status(HttpStatus.OK).build();
-                        }
-                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-
-                    case "piso":
-                        vaga.get().setPiso(request.edit());
-                        return ResponseEntity.status(HttpStatus.OK).build();
-                    default:
-                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-                }
-            }
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-
-        }
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 
 }
